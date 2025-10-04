@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/configs/session.php';
+// Start the session
+session_start();
 
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
@@ -49,13 +50,13 @@ $users = $userModel->getUsers($params);
                                 <?php echo $user['type']?>
                             </td>
                             <td>
-                                <a href="form_user.php?id=<?php echo $user['id'] ?>&session_id=<?php echo session_id(); ?>">
+                                <a href="form_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Update"></i>
                                 </a>
-                                <a href="view_user.php?id=<?php echo $user['id'] ?>&session_id=<?php echo session_id(); ?>">
+                                <a href="view_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eye" aria-hidden="true" title="View"></i>
                                 </a>
-                                <a href="delete_user.php?id=<?php echo $user['id'] ?>&session_id=<?php echo session_id(); ?>">
+                                <a href="delete_user.php?id=<?php echo $user['id'] ?>">
                                     <i class="fa fa-eraser" aria-hidden="true" title="Delete"></i>
                                 </a>
                             </td>
@@ -69,9 +70,5 @@ $users = $userModel->getUsers($params);
             </div>
         <?php } ?>
     </div>
-    <script>
-    // Lưu session_id của PHP vào localStorage
-    localStorage.setItem('session_id', '<?php echo session_id(); ?>');
-    </script>
 </body>
 </html>

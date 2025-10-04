@@ -20,16 +20,15 @@ if(!empty($_GET['keyword'])) {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="list_users.php?session_id=<?php echo session_id(); ?>">App Web 1</a>
+                <a class="navbar-brand" href="list_users.php">App Web 1</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="form_user.php?session_id=<?php echo session_id(); ?>">Add new user</a></li>
+                    <li><a href="form_user.php">Add new user</a></li>
 
                 </ul>
-                <form class="navbar-form navbar-left" method="get" action="list_users.php">
-                    <input type="hidden" name="session_id" value="<?php echo session_id(); ?>">
+                <form class="navbar-form navbar-left">
                     <div class="form-group">
                         <input type="text" name="keyword" class="form-control" placeholder="Search users"
                                value="<?php echo $keyword ?>"
@@ -44,18 +43,15 @@ if(!empty($_GET['keyword'])) {
                             Account <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="view_user.php?id=<?php echo $id ?>&session_id=<?php echo session_id(); ?>">Profile</a></li>
+                            <li><a href="view_user.php?id=<?php echo $id ?>">Profile</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="login.php?session_id=<?php echo session_id(); ?>">Login</a></li>
-                            <li><a href="logout.php?session_id=<?php echo session_id(); ?>">Logout</a></li>
+                            <li><a href="login.php">Login</a></li>
+                            <li><a href="logout.php">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
     </nav>
-    <script>
-    localStorage.setItem('session_id', '<?php echo session_id(); ?>');
-    </script>
     <?php if(!empty($_SESSION['message'])){ ?>
         <div class="alert alert-warning" role="alert">
             <?php
