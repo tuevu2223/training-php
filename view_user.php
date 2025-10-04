@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/configs/session.php';
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
@@ -8,17 +9,6 @@ $id = NULL;
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
     $user = $userModel->findUserById($id);//Update existing user
-}
-
-
-if (!empty($_POST['submit'])) {
-
-    if (!empty($id)) {
-        $userModel->updateUser($_POST);
-    } else {
-        $userModel->insertUser($_POST);
-    }
-    header('location: list_users.php');
 }
 
 ?>
@@ -51,11 +41,16 @@ if (!empty($_POST['submit'])) {
                 <span><?php if (!empty($user[0]['name'])) echo $user[0]['email'] ?></span>
             </div>
         </form>
+        <a href="list_users.php?session_id=<?php echo session_id(); ?>" class="btn btn-secondary">List Users</a>
     <?php } else { ?>
         <div class="alert alert-success" role="alert">
             User not found!
         </div>
     <?php } ?>
 </div>
+<script>
+    // Lưu session_id của PHP vào localStorage
+    localStorage.setItem('session_id', '<?php echo session_id(); ?>');
+</script>
 </body>
 </html>

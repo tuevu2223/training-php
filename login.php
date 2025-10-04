@@ -1,6 +1,5 @@
 <?php
-// Start the session
-session_start();
+require_once __DIR__ . '/configs/session.php';
 
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
@@ -17,7 +16,13 @@ if (!empty($_POST['submit'])) {
         $_SESSION['id'] = $user[0]['id'];
 
         $_SESSION['message'] = 'Login successful';
-        header('location: list_users.php');
+        // Xuất session_id để lưu vào localStorage và redirect
+        echo "<script>
+            localStorage.setItem('session_id', '".session_id()."');
+            window.location.href = 'list_users.php?session_id=".session_id()."';
+        </script>";
+        exit;
+        // header('location: list_users.php');
     }else {
         //Login failed
         $_SESSION['message'] = 'Login failed';

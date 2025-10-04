@@ -1,6 +1,5 @@
 <?php
-// Start the session
-session_start();
+require_once __DIR__ . '/configs/session.php';
 require_once 'models/UserModel.php';
 $userModel = new UserModel();
 
@@ -20,7 +19,7 @@ if (!empty($_POST['submit'])) {
     } else {
         $userModel->insertUser($_POST);
     }
-    header('location: list_users.php');
+    header('location: list_users.php?session_id=' . session_id());
 }
 
 ?>
@@ -38,7 +37,7 @@ if (!empty($_POST['submit'])) {
                 <div class="alert alert-warning" role="alert">
                     User form
                 </div>
-                <form method="POST">
+                <form method="POST" action="form_user.php?session_id=<?php echo session_id(); ?>">
                     <input type="hidden" name="id" value="<?php echo $_id ?>">
                     <div class="form-group">
                         <label for="name">Name</label>
@@ -57,5 +56,9 @@ if (!empty($_POST['submit'])) {
                 </div>
             <?php } ?>
     </div>
+    <script>
+    // Lưu session_id của PHP vào localStorage
+    localStorage.setItem('session_id', '<?php echo session_id(); ?>');
+    </script>
 </body>
 </html>
